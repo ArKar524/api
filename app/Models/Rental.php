@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Support\QueryFilters\Filterable;
 
 class Rental extends Model
 {
+    use Filterable;
     protected $guarded = [];
 
     public function rentalRequest(): BelongsTo

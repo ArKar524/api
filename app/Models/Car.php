@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Support\QueryFilters\Filterable;
 
 class Car extends Model
 {
+    use Filterable;
     protected $guarded = [];
 
     public function owner(): BelongsTo
