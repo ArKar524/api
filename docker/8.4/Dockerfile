@@ -1,7 +1,7 @@
 # ---------- Build frontend ----------
 FROM node:22-bookworm-slim AS frontend
 WORKDIR /app
-COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
+COPY package.json package-lock.json* ./
 RUN \
   if [ -f pnpm-lock.yaml ]; then corepack enable && pnpm i --frozen-lockfile; \
   elif [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
