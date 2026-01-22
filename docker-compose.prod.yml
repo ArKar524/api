@@ -1,0 +1,80 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/8.4/Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      pgsql:
+        condition: service_healthy
+    networks:
+      - kargate
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "${APP_PORT:-80}:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - kargate
+
+  pgsql:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - kargate
+
+  # Optional worker (recommended)
+  worker:
+    build:
+      context: .
+      dockerfile: docker/8.4/Dockerfile
+    command:
+      ["php", "artisan", "queue:work", "--sleep=3", "--tries=3", "--timeout=90"]
+    env_file:
+      - .env
+    depends_on:
+      - app
+      - pgsql
+    networks:
+      - kargate
+
+  # Optional scheduler (recommended)
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/8.4/Dockerfile
+    command:
+      [
+        "sh",
+        "-lc",
+        "while true; do php artisan schedule:run --no-interaction; sleep 60; done",
+      ]
+    env_file:
+      - .env
+    depends_on:
+      - app
+      - pgsql
+    networks:
+      - kargate
+
+networks:
+  kargate:
+    driver: bridge
+
+volumes:
+  pgsql-data:

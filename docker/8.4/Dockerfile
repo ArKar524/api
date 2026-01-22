@@ -1,40 +1,57 @@
-FROM php:8.4-cli-bookworm
+# ---------- Build frontend ----------
+FROM node:22-bookworm-slim AS frontend
+WORKDIR /app
+COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
+RUN \
+  if [ -f pnpm-lock.yaml ]; then corepack enable && pnpm i --frozen-lockfile; \
+  elif [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
+  else npm ci; fi
+COPY . .
+RUN \
+  if [ -f pnpm-lock.yaml ]; then pnpm build; \
+  elif [ -f yarn.lock ]; then yarn build; \
+  else npm run build; fi
 
-ARG NODE_VERSION=22
-ARG POSTGRES_VERSION=18
+# ---------- Build PHP deps ----------
+FROM composer:2 AS vendor
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+# ---------- Runtime ----------
+FROM php:8.4-fpm-bookworm AS app
 
 WORKDIR /var/www/html
-ENV DEBIAN_FRONTEND=noninteractive
+ENV APP_ENV=production
+ENV APP_DEBUG=false
 
-# System deps
+# System deps + PHP extensions
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git curl ca-certificates unzip zip supervisor \
+    ca-certificates curl git unzip \
     libpng-dev libzip-dev libicu-dev libxml2-dev libonig-dev \
     libpq-dev \
-    dnsutils nano \
-  && rm -rf /var/lib/apt/lists/*
-
-# PHP extensions (core)
-RUN docker-php-ext-configure intl \
+  && docker-php-ext-configure intl \
   && docker-php-ext-install -j$(nproc) \
-    pdo_pgsql pgsql \
-    mbstring xml intl bcmath zip gd opcache
-
-# Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Node (optional - only if you REALLY need it inside this container)
-RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
-  && apt-get update && apt-get install -y --no-install-recommends nodejs \
-  && npm i -g npm pnpm \
+      pdo_pgsql pgsql mbstring xml intl bcmath zip gd opcache \
   && rm -rf /var/lib/apt/lists/*
 
-# PostgreSQL client (optional)
-RUN apt-get update && apt-get install -y --no-install-recommends postgresql-client-${POSTGRES_VERSION} \
-  && rm -rf /var/lib/apt/lists/*
+# Optional: tune OPcache (good for prod)
+RUN { \
+  echo "opcache.enable=1"; \
+  echo "opcache.enable_cli=0"; \
+  echo "opcache.validate_timestamps=0"; \
+  echo "opcache.jit=0"; \
+} > /usr/local/etc/php/conf.d/99-opcache.ini
 
-# Supervisor config
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Copy app code
+COPY . .
 
-EXPOSE 80
-CMD ["/usr/bin/supervisord","-n"]
+# Copy vendor and built assets from build stages
+COPY --from=vendor /app/vendor /var/www/html/vendor
+COPY --from=frontend /app/public/build /var/www/html/public/build
+
+# Permissions (Laravel needs storage + bootstrap/cache writable)
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 9000
+CMD ["php-fpm"]
