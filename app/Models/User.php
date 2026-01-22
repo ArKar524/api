@@ -3,7 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Car;
+use App\Models\Rental;
+use App\Models\RentalRequest;
+use App\Models\Verification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,5 +49,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class, 'owner_id');
+    }
+
+    public function verifications(): HasMany
+    {
+        return $this->hasMany(Verification::class);
+    }
+
+    public function rentalRequestsAsDriver(): HasMany
+    {
+        return $this->hasMany(RentalRequest::class, 'driver_id');
+    }
+
+    public function rentalRequestsAsOwner(): HasMany
+    {
+        return $this->hasMany(RentalRequest::class, 'owner_id');
+    }
+
+    public function rentalsAsDriver(): HasMany
+    {
+        return $this->hasMany(Rental::class, 'driver_id');
+    }
+
+    public function rentalsAsOwner(): HasMany
+    {
+        return $this->hasMany(Rental::class, 'owner_id');
     }
 }
