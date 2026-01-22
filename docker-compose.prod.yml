@@ -1,8 +1,8 @@
 services:
   app:
     build:
-      context: .
-      dockerfile: docker/8.4/Dockerfile
+      context: "./docker/8.4"
+      dockerfile: Dockerfile
     env_file:
       - .env
     depends_on:
@@ -41,8 +41,8 @@ services:
   # Optional worker (recommended)
   worker:
     build:
-      context: .
-      dockerfile: docker/8.4/Dockerfile
+      context: "./docker/8.4"
+      dockerfile: Dockerfile
     command:
       ["php", "artisan", "queue:work", "--sleep=3", "--tries=3", "--timeout=90"]
     env_file:
@@ -56,8 +56,8 @@ services:
   # Optional scheduler (recommended)
   scheduler:
     build:
-      context: .
-      dockerfile: docker/8.4/Dockerfile
+      context: "./docker/8.4"
+      dockerfile: Dockerfile
     command:
       [
         "sh",
