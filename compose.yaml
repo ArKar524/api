@@ -1,8 +1,8 @@
 services:
   app:
     build:
-      context: ./docker/8.4
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/8.4/Dockerfile
     container_name: kargate_app
     ports:
       - "${APP_PORT:-9690}:80"
