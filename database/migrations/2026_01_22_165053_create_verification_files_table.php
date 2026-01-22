@@ -16,7 +16,10 @@ return new class extends Migration
             $table->foreignId('verification_id')->constrained()->cascadeOnDelete();
             $table->enum('category', ['identity', 'residence', 'vehicle', 'other'])->default('identity');
             $table->string('file_path');
+            $table->string('disk')->default('public');
             $table->string('mime_type')->nullable();
+            $table->unsignedBigInteger('size')->nullable();
+            $table->json('meta')->nullable();
             $table->integer('sort_order')->default(0);
             $table->timestamp('uploaded_at')->useCurrent();
             $table->timestamps();

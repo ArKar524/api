@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('car_photos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('car_id')->constrained()->cascadeOnDelete();
-            $table->string('url');
+            $table->string('path');
+            $table->string('disk')->default('public');
             $table->enum('type', ['exterior', 'interior', 'engine', 'other'])->default('exterior');
+            $table->string('mime_type')->nullable();
+            $table->unsignedBigInteger('size')->nullable();
             $table->string('caption')->nullable();
             $table->integer('sequence')->default(0);
             $table->timestamps();

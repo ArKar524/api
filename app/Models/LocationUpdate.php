@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LocationUpdate extends Model
 {
+    protected $guarded = [];
+
     public function rental(): BelongsTo
     {
         return $this->belongsTo(Rental::class);

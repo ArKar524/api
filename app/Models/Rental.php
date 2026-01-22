@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Rental extends Model
 {
+    protected $guarded = [];
+
     public function rentalRequest(): BelongsTo
     {
         return $this->belongsTo(RentalRequest::class);

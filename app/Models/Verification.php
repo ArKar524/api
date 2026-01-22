@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Verification extends Model
 {
+    protected $guarded = [];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

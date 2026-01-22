@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('car_id')->constrained()->cascadeOnDelete();
             $table->enum('doc_type', ['registration', 'insurance', 'inspection', 'other'])->default('registration');
             $table->string('file_path');
+            $table->string('disk')->default('public');
+            $table->string('mime_type')->nullable();
+            $table->unsignedBigInteger('size')->nullable();
             $table->date('expires_at')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->timestamps();

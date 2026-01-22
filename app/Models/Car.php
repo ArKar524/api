@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Car extends Model
 {
+    protected $guarded = [];
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
