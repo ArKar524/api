@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20', 'unique:users,phone'],
             'email' => ['nullable', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
             'role' => ['nullable', 'in:owner,driver'],
             'device_name' => ['nullable', 'string', 'max:100'],
         ];
