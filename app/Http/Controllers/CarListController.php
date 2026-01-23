@@ -16,7 +16,8 @@ class CarListController extends Controller
 
         $user = $request->user('sanctum');
 
-        $query = Car::query();
+        $query = Car::query()
+            ->with(['owner', 'photos', 'documents']);
 
         if ($user?->role === 'owner') {
             $query->where('owner_id', $user->id);
