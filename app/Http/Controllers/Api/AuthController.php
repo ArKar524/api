@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Notifications\ActionNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -32,6 +33,14 @@ class AuthController extends Controller
 
         $deviceName = $data['device_name'] ?? 'api';
         $token = $user->createToken($deviceName)->plainTextToken;
+
+        $user->notify(new ActionNotification(
+            'Welcome aboard',
+            'Your account has been created successfully.',
+            'account.registered',
+            null,
+            ['user_id' => $user->id],
+        ));
 
         return response()->json([
             'success' => true,

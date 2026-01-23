@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\CarDocument;
 use App\Models\CarPhoto;
 use App\Models\User;
+use App\Notifications\ActionNotification;
 use App\Traits\HandlesFileUploads;
 use Illuminate\Support\Facades\DB;
 
@@ -68,6 +69,17 @@ class CarApprovalService
                 }
             }
 
+            $owner->notify(new ActionNotification(
+                'Car submitted',
+                'Your car listing has been submitted for review.',
+                'car.submitted',
+                'pending',
+                [
+                    'car_id' => $car->id,
+                    'owner_id' => $owner->id,
+                ],
+            ));
+
             return $car->load(['photos', 'documents']);
         });
     }
@@ -83,6 +95,20 @@ class CarApprovalService
                 $car->description = trim(($car->description ? $car->description . PHP_EOL : '') . 'Review: ' . $notes);
             }
             $car->save();
+
+            $car->owner()->first()?->notify(new ActionNotification(
+                'Car reviewed',
+                $status === 'approved'
+                    ? 'Your car listing has been approved.'
+                    : 'Your car listing has been rejected.',
+                'car.reviewed',
+                $status,
+                [
+                    'car_id' => $car->id,
+                    'owner_id' => $car->owner_id,
+                    'notes' => $notes,
+                ],
+            ));
 
             return $car->fresh(['photos', 'documents', 'owner']);
         });

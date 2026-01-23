@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminCarApprovalController;
 use App\Http\Controllers\Admin\AdminOwnerController;
 use App\Http\Controllers\Admin\AdminVerificationController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\CarListController;
 use App\Http\Controllers\KycController;
 use App\Http\Controllers\Owner\CarController;
@@ -44,6 +45,12 @@ Route::get('cars', [CarListController::class, 'index']);
 Route::get('cars/{car}', [CarListController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('notifications', [NotificationController::class, 'index']);
+    Route::get('notifications/unread-count', [NotificationController::class, 'unreadCount']);
+    Route::patch('notifications/read-all', [NotificationController::class, 'markAllRead']);
+    Route::patch('notifications/{id}/read', [NotificationController::class, 'markRead']);
+    Route::delete('notifications/{id}', [NotificationController::class, 'delete']);
+
     Route::prefix('owner')->middleware('role:owner')->group(function () {
         Route::get('cars', [CarController::class, 'index']);
         Route::get('cars/{car}', [CarListController::class, 'show']);

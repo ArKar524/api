@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Verification;
 use App\Models\VerificationFile;
+use App\Notifications\ActionNotification;
 use App\Traits\HandlesFileUploads;
 use Illuminate\Support\Facades\DB;
 
@@ -34,6 +35,17 @@ class VerificationService
                 }
             }
 
+            $user->notify(new ActionNotification(
+                'KYC submitted',
+                'Your owner verification has been submitted for review.',
+                'kyc.submitted',
+                'pending',
+                [
+                    'verification_id' => $verification->id,
+                    'entity_type' => 'owner',
+                ],
+            ));
+
             return $verification->load('files');
         });
     }
@@ -62,6 +74,17 @@ class VerificationService
                 }
             }
 
+            $user->notify(new ActionNotification(
+                'KYC submitted',
+                'Your driver verification has been submitted for review.',
+                'kyc.submitted',
+                'pending',
+                [
+                    'verification_id' => $verification->id,
+                    'entity_type' => 'driver',
+                ],
+            ));
+
             return $verification->load('files');
         });
     }
@@ -73,6 +96,18 @@ class VerificationService
             $verification->notes = $notes;
             $verification->completed_at = now();
             $verification->save();
+
+            $verification->user()->first()?->notify(new ActionNotification(
+                'KYC reviewed',
+                $status === 'approved' ? 'Your KYC has been approved.' : 'Your KYC has been rejected.',
+                'kyc.reviewed',
+                $status,
+                [
+                    'verification_id' => $verification->id,
+                    'entity_type' => $verification->entity_type,
+                    'notes' => $notes,
+                ],
+            ));
 
             return $verification->fresh('files', 'user');
         });
