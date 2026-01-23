@@ -62,7 +62,7 @@ COPY --from=frontend --chown=www-data:www-data /app/public/build ./public/build
 
 # Ensure essential Laravel directories are writable
 # We do this before switching to USER www-data
-RUN chmod -R 775 storage bootstrap/cache
+RUN chmod -R 775 storage
 
 # Switch to the non-root user
 USER www-data
