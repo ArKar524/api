@@ -9,7 +9,14 @@ class CarPolicy
 {
     public function create(User $user): bool
     {
-        return $user->role === 'owner';
+        if ($user->role !== 'owner') {
+            return false;
+        }
+
+        return $user->verifications()
+            ->where('entity_type', 'owner')
+            ->where('status', 'approved')
+            ->exists();
     }
 
     public function update(User $user, Car $car): bool
