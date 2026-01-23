@@ -32,10 +32,12 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::get('cars', [CarListController::class, 'index']);
+Route::get('cars/{car}', [CarListController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('owner')->middleware('role:owner')->group(function () {
         Route::get('cars', [CarController::class, 'index']);
+        Route::get('cars/{car}', [CarListController::class, 'show']);
         Route::post('kyc', [KycController::class, 'submitOwner']);
         Route::post('cars', [CarController::class, 'store']);
         Route::get('rental-requests', [OwnerRentalRequestController::class, 'index']);

@@ -24,6 +24,7 @@ return [
         'http://192.168.100.213:5173',
         'http://192.168.100.213:9690',
         'http://192.168.100.213',
+        'http://unshapely-unsick-kamilah.ngrok-free.dev',
     ],
 
     'allowed_origins_patterns' => [],
