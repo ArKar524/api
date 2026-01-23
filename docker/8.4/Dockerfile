@@ -62,7 +62,7 @@ COPY --from=frontend --chown=www-data:www-data /app/public/build ./public/build
 
 # Ensure essential Laravel directories are writable
 # We do this before switching to USER www-data
-RUN chmod -R 775 storage bootstrap/cache
+RUN chmod -R 775 storage
 
 # Switch to the non-root user
 USER www-data
@@ -70,9 +70,9 @@ USER www-data
 # PRODUCTION PERFORMANCE: Cache Laravel config, routes, and views
 # Note: This requires a valid .env or env vars set at build time if your 
 # config files use env() without defaults.
-RUN php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache
+# RUN php artisan config:cache && \
+#     php artisan route:cache && \
+#     php artisan view:cache
 
 # PHP-FPM listens on 9000 by default. 
 # 80 is for Nginx (which should be a separate container).
