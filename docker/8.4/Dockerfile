@@ -50,8 +50,14 @@ COPY --chown=www-data:www-data . .
 COPY --from=vendor --chown=www-data:www-data /app/vendor ./vendor
 COPY --from=frontend --chown=www-data:www-data /app/public/build ./public/build
 
-# 3. Permissions for Laravel
-RUN chmod -R 775 storage bootstrap/cache && \
+# 3. Create missing directories and set permissions
+# We create them first to ensure chmod doesn't fail
+RUN mkdir -p storage/framework/cache/data \
+  storage/framework/sessions \
+  storage/framework/views \
+  storage/logs \
+  bootstrap/cache && \
+  chmod -R 775 storage bootstrap/cache && \
   chown -R www-data:www-data storage bootstrap/cache
 
 USER www-data
