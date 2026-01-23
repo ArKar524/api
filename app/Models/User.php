@@ -8,6 +8,7 @@ use App\Models\RentalRequest;
 use App\Models\Verification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -63,6 +64,30 @@ class User extends Authenticatable
     public function verifications(): HasMany
     {
         return $this->hasMany(Verification::class);
+    }
+
+    public function ownerVerifications(): HasMany
+    {
+        return $this->verifications()->where('entity_type', 'owner');
+    }
+
+    public function driverVerifications(): HasMany
+    {
+        return $this->verifications()->where('entity_type', 'driver');
+    }
+
+    public function latestOwnerVerification(): HasOne
+    {
+        return $this->hasOne(Verification::class)
+            ->where('entity_type', 'owner')
+            ->latestOfMany();
+    }
+
+    public function latestDriverVerification(): HasOne
+    {
+        return $this->hasOne(Verification::class)
+            ->where('entity_type', 'driver')
+            ->latestOfMany();
     }
 
     public function rentalRequestsAsDriver(): HasMany

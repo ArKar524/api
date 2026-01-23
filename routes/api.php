@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminCarApprovalController;
+use App\Http\Controllers\Admin\AdminOwnerController;
 use App\Http\Controllers\Admin\AdminVerificationController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\CarListController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Owner\CarController;
 use App\Http\Controllers\Driver\RentalRequestController as DriverRentalRequestController;
 use App\Http\Controllers\Owner\RentalRequestController as OwnerRentalRequestController;
 use App\Http\Controllers\Owner\RentalController as OwnerRentalController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +20,14 @@ Route::get('/ping', function (Request $request) {
 });
 
 Route::get('/user', function (Request $request) {
-    return response()->json($request->user());
+    return response()->json([
+        'success' => true,
+        'data' => [
+            'user' => new UserResource($request->user()),
+        ],
+        'message' => 'Profile fetched.',
+        'errors' => null,
+    ]);
 })->middleware('auth:sanctum');
 Route::post('login', [AuthController::class, 'login']);
 
@@ -50,6 +59,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('admin')->middleware('role:admin')->group(function () {
+        Route::get('owners', [AdminOwnerController::class, 'index']);
+        Route::get('owners/{id}', [AdminOwnerController::class, 'show']);
         Route::post('verifications/{id}/review', [AdminVerificationController::class, 'review']);
         Route::post('cars/{id}/review', [AdminCarApprovalController::class, 'review']);
     });

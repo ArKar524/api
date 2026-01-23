@@ -16,10 +16,10 @@ class ApiResponse
         ], $status);
     }
 
-    public static function paginate(Paginator $paginator, string $message = '')
+    public static function paginate(Paginator $paginator, string $message = '', ?array $items = null)
     {
         return self::success([
-            'items' => $paginator->items(),
+            'items' => $items ?? $paginator->items(),
             'meta' => [
                 'current_page' => $paginator->currentPage(),
                 'last_page' => $paginator->lastPage(),
