@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCarApprovalController;
+use App\Http\Controllers\Admin\AdminCarPageController;
 use App\Http\Controllers\Admin\AdminOwnerPageController;
 use App\Http\Controllers\Admin\AdminVerificationController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +23,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('cars', [AdminCarPageController::class, 'index'])->name('cars.index');
+    Route::get('cars/{id}', [AdminCarPageController::class, 'show'])->name('cars.show');
+    Route::post('cars/{id}/review', [AdminCarApprovalController::class, 'review'])->name('cars.review');
     Route::get('owners', [AdminOwnerPageController::class, 'index'])->name('owners.index');
     Route::get('owners/{id}', [AdminOwnerPageController::class, 'show'])->name('owners.show');
     Route::post('verifications/{id}/review', [AdminVerificationController::class, 'review'])
