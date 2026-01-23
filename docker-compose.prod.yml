@@ -4,9 +4,7 @@ services:
       context: .
       dockerfile: docker/8.4/Dockerfile
     container_name: kargate_api
-    restart: always
-    env_file:
-      - .env
+    restart: always 
     # REMOVED the "." volume here. The code is already in the image.
     volumes:
       - storage-data:/var/www/html/storage 
