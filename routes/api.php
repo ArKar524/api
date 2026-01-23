@@ -12,9 +12,15 @@ use App\Http\Controllers\Owner\RentalController as OwnerRentalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/ping', function (Request $request) {
+    return response()->json(['pong' => '1234']);
+});
+
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    return response()->json($request->user());
 })->middleware('auth:sanctum');
+Route::post('login', [AuthController::class, 'login']);
 
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
