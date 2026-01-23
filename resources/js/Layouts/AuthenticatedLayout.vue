@@ -11,8 +11,185 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100">
+        <template v-if="$page.props.auth.user.role === 'admin'">
+            <div class="flex min-h-screen">
+                <aside
+                    class="hidden w-64 flex-col border-r border-gray-200 bg-white lg:flex"
+                >
+                    <div class="flex h-16 items-center px-6">
+                        <Link :href="route('dashboard')">
+                            <ApplicationLogo
+                                class="block h-9 w-auto fill-current text-gray-800"
+                            />
+                        </Link>
+                    </div>
+                    <div class="flex flex-1 flex-col gap-1 px-2 py-4">
+                        <ResponsiveNavLink
+                            :href="route('dashboard')"
+                            :active="route().current('dashboard')"
+                        >
+                            Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('admin.owners.index')"
+                            :active="route().current('admin.owners.*')"
+                        >
+                            Owners
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('admin.cars.index')"
+                            :active="route().current('admin.cars.*')"
+                        >
+                            Cars
+                        </ResponsiveNavLink>
+                    </div>
+                </aside>
+
+                <div class="flex min-h-screen flex-1 flex-col">
+                    <header
+                        class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 bg-white px-4 py-4 lg:px-8"
+                    >
+                        <div class="flex min-w-0 items-center gap-3">
+                            <button
+                                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none lg:hidden"
+                                @click="
+                                    showingNavigationDropdown =
+                                        !showingNavigationDropdown
+                                "
+                            >
+                                <svg
+                                    class="h-6 w-6"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                </svg>
+                            </button>
+                            <div class="min-w-0">
+                                <slot name="header">
+                                    <span class="text-sm font-semibold text-gray-600">
+                                        Admin panel
+                                    </span>
+                                </slot>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <Dropdown align="right" width="48">
+                                <template #trigger>
+                                    <span class="inline-flex rounded-md">
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                        >
+                                            {{ $page.props.auth.user.name }}
+
+                                            <svg
+                                                class="-me-0.5 ms-2 h-4 w-4"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </template>
+
+                                <template #content>
+                                    <DropdownLink
+                                        :href="route('profile.edit')"
+                                    >
+                                        Profile
+                                    </DropdownLink>
+                                    <DropdownLink
+                                        :href="route('logout')"
+                                        method="post"
+                                        as="button"
+                                    >
+                                        Log Out
+                                    </DropdownLink>
+                                </template>
+                            </Dropdown>
+                        </div>
+                    </header>
+
+                    <main class="flex-1">
+                        <slot />
+                    </main>
+                </div>
+            </div>
+
+            <div
+                v-if="showingNavigationDropdown"
+                class="fixed inset-0 z-40 lg:hidden"
+            >
+                <div
+                    class="absolute inset-0 bg-gray-900/50"
+                    @click="showingNavigationDropdown = false"
+                />
+                <aside class="relative z-50 flex h-full w-64 flex-col bg-white shadow-xl">
+                    <div class="flex h-16 items-center justify-between px-6">
+                        <Link :href="route('dashboard')">
+                            <ApplicationLogo
+                                class="block h-8 w-auto fill-current text-gray-800"
+                            />
+                        </Link>
+                        <button
+                            class="rounded-md p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-500"
+                            @click="showingNavigationDropdown = false"
+                        >
+                            <svg
+                                class="h-5 w-5"
+                                stroke="currentColor"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 flex-col gap-1 px-2 py-4">
+                        <ResponsiveNavLink
+                            :href="route('dashboard')"
+                            :active="route().current('dashboard')"
+                        >
+                            Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('admin.owners.index')"
+                            :active="route().current('admin.owners.*')"
+                        >
+                            Owners
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('admin.cars.index')"
+                            :active="route().current('admin.cars.*')"
+                        >
+                            Cars
+                        </ResponsiveNavLink>
+                    </div>
+                </aside>
+            </div>
+        </template>
+
+        <template v-else>
             <nav
                 class="border-b border-gray-100 bg-white"
             >
@@ -38,20 +215,6 @@ const showingNavigationDropdown = ref(false);
                                     :active="route().current('dashboard')"
                                 >
                                     Dashboard
-                                </NavLink>
-                                <NavLink
-                                    v-if="$page.props.auth.user.role === 'admin'"
-                                    :href="route('admin.owners.index')"
-                                    :active="route().current('admin.owners.*')"
-                                >
-                                    Owners
-                                </NavLink>
-                                <NavLink
-                                    v-if="$page.props.auth.user.role === 'admin'"
-                                    :href="route('admin.cars.index')"
-                                    :active="route().current('admin.cars.*')"
-                                >
-                                    Cars
                                 </NavLink>
                             </div>
                         </div>
@@ -160,20 +323,6 @@ const showingNavigationDropdown = ref(false);
                         >
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            v-if="$page.props.auth.user.role === 'admin'"
-                            :href="route('admin.owners.index')"
-                            :active="route().current('admin.owners.*')"
-                        >
-                            Owners
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            v-if="$page.props.auth.user.role === 'admin'"
-                            :href="route('admin.cars.index')"
-                            :active="route().current('admin.cars.*')"
-                        >
-                            Cars
-                        </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -221,6 +370,6 @@ const showingNavigationDropdown = ref(false);
             <main>
                 <slot />
             </main>
-        </div>
+        </template>
     </div>
 </template>
