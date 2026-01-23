@@ -27,12 +27,12 @@ ENV APP_DEBUG=false
 
 # System deps + PHP extensions
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl git unzip \
-    libpng-dev libzip-dev libicu-dev libxml2-dev libonig-dev \
+    ca-certificates unzip \
+    libpng-dev libzip-dev libicu-dev libxml2-dev \
     libpq-dev \
-  && docker-php-ext-configure intl \
+  && docker-php-ext-configure \
   && docker-php-ext-install -j$(nproc) \
-      pdo_pgsql pgsql mbstring xml intl bcmath zip gd opcache \
+      pdo_pgsql pgsql mbstring xml bcmath zip gd opcache \
   && rm -rf /var/lib/apt/lists/*
 
 # Optional: tune OPcache (good for prod)
@@ -46,12 +46,13 @@ RUN { \
 # Copy app code
 COPY . .
 
-# Copy vendor and built assets from build stages
-COPY --from=vendor /app/vendor /var/www/html/vendor
-COPY --from=frontend /app/public/build /var/www/html/public/build
+# # Copy vendor and built assets from build stages
+# COPY --from=vendor /app/vendor /var/www/html/vendor
+# COPY --from=frontend /app/public/build /var/www/html/public/build
 
 # Permissions (Laravel needs storage + bootstrap/cache writable)
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 9000
+EXPOSE 80/tcp
+
 CMD ["php-fpm"]
