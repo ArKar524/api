@@ -7,6 +7,46 @@ endpoints:
     custom: []
     httpMethods:
       - GET
+    uri: api/ping
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"pong":"1234"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          vary: Origin
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
     uri: api/user
     metadata:
       custom: []
@@ -36,7 +76,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
     responseFields: []
     auth: []
@@ -115,7 +155,7 @@ endpoints:
         name: role
         description: ''
         required: false
-        example: driver
+        example: owner
         type: string
         enumValues:
           - owner
@@ -139,7 +179,7 @@ endpoints:
       phone: ngzmiyvdljnikhwa
       email: breitenberg.gilbert@example.com
       password: kXaz<m
-      role: driver
+      role: owner
       device_name: w
     fileParameters: []
     responses: []
@@ -279,7 +319,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
     responseFields: []
     auth: []
@@ -424,7 +464,7 @@ endpoints:
         name: filter.start_at_from
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -435,7 +475,7 @@ endpoints:
         name: filter.start_at_to
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -451,11 +491,11 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"success":true,"data":{"items":[],"meta":{"current_page":16,"last_page":1,"per_page":22,"total":0,"from":null,"to":null,"links":{"next":null,"prev":"http:\/\/localhost\/api\/cars?page=15"}}},"message":"Cars fetched successfully.","errors":null}'
+        content: '{"success":true,"data":{"items":[],"meta":{"current_page":16,"last_page":1,"per_page":22,"total":0,"from":null,"to":null,"links":{"next":null,"prev":"http:\/\/192.168.100.213:9690\/api\/cars?page=15"}}},"message":"Cars fetched successfully.","errors":null}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
     responseFields: []
     auth: []
@@ -600,7 +640,7 @@ endpoints:
         name: filter.start_at_from
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -611,7 +651,7 @@ endpoints:
         name: filter.start_at_to
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -631,7 +671,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
     responseFields: []
     auth: []
@@ -1050,7 +1090,7 @@ endpoints:
         name: filter.start_at_from
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1061,7 +1101,7 @@ endpoints:
         name: filter.start_at_to
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1081,7 +1121,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
     responseFields: []
     auth: []
@@ -1226,7 +1266,7 @@ endpoints:
         name: filter.start_at_from
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1237,7 +1277,7 @@ endpoints:
         name: filter.start_at_to
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1257,7 +1297,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
     responseFields: []
     auth: []
@@ -1507,7 +1547,7 @@ endpoints:
         name: filter.start_at_from
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1518,7 +1558,7 @@ endpoints:
         name: filter.start_at_to
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-22T18:42:30'
+        example: '2026-01-23T17:18:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1538,7 +1578,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
     responseFields: []
     auth: []

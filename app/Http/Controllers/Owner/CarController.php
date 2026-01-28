@@ -9,6 +9,7 @@ use App\Models\Car;
 use App\Support\ApiResponse;
 use App\Support\QueryFilters\AllowedFilters;
 use App\Services\CarApprovalService;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {

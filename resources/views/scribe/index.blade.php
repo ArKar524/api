@@ -26,7 +26,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://localhost";
+        var tryItOutBaseUrl = "http://192.168.100.213:9690";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -71,7 +71,10 @@
                     <a href="#endpoints">Endpoints</a>
                 </li>
                                     <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-user">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-ping">
+                                <a href="#endpoints-GETapi-ping">GET api/ping</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-user">
                                 <a href="#endpoints-GETapi-user">GET api/user</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-register">
@@ -127,7 +130,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 22, 2026</li>
+        <li>Last updated: January 23, 2026</li>
     </ul>
 </div>
 
@@ -136,7 +139,7 @@
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>http://192.168.100.213:9690</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -150,7 +153,133 @@ You can switch the language used with the tabs at the top right (or from the nav
 
     
 
-                                <h2 id="endpoints-GETapi-user">GET api/user</h2>
+                                <h2 id="endpoints-GETapi-ping">GET api/ping</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-ping">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://192.168.100.213:9690/api/ping" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.100.213:9690/api/ping"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-ping">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+vary: Origin
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;pong&quot;: &quot;1234&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-ping" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-ping"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-ping"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-ping" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-ping">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-ping" data-method="GET"
+      data-path="api/ping"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-ping', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-ping"
+                    onclick="tryItOut('GETapi-ping');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-ping"
+                    onclick="cancelTryOut('GETapi-ping');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-ping"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/ping</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-ping"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-ping"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-user">GET api/user</h2>
 
 <p>
 </p>
@@ -163,14 +292,14 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/user" \
+    --get "http://192.168.100.213:9690/api/user" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user"
+    "http://192.168.100.213:9690/api/user"
 );
 
 const headers = {
@@ -195,7 +324,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -289,7 +418,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/auth/register" \
+    "http://192.168.100.213:9690/api/auth/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -297,7 +426,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"phone\": \"ngzmiyvdljnikhwa\",
     \"email\": \"breitenberg.gilbert@example.com\",
     \"password\": \"kXaz&lt;m\",
-    \"role\": \"driver\",
+    \"role\": \"owner\",
     \"device_name\": \"w\"
 }"
 </code></pre></div>
@@ -305,7 +434,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/register"
+    "http://192.168.100.213:9690/api/auth/register"
 );
 
 const headers = {
@@ -318,7 +447,7 @@ let body = {
     "phone": "ngzmiyvdljnikhwa",
     "email": "breitenberg.gilbert@example.com",
     "password": "kXaz&lt;m",
-    "role": "driver",
+    "role": "owner",
     "device_name": "w"
 };
 
@@ -459,10 +588,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="POSTapi-auth-register"
-               value="driver"
+               value="owner"
                data-component="body">
     <br>
-<p>Example: <code>driver</code></p>
+<p>Example: <code>owner</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>owner</code></li> <li><code>driver</code></li></ul>
         </div>
@@ -493,7 +622,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/auth/login" \
+    "http://192.168.100.213:9690/api/auth/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -506,7 +635,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/login"
+    "http://192.168.100.213:9690/api/auth/login"
 );
 
 const headers = {
@@ -653,14 +782,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/auth/logout" \
+    "http://192.168.100.213:9690/api/auth/logout" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/logout"
+    "http://192.168.100.213:9690/api/auth/logout"
 );
 
 const headers = {
@@ -763,14 +892,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/auth/me" \
+    --get "http://192.168.100.213:9690/api/auth/me" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/me"
+    "http://192.168.100.213:9690/api/auth/me"
 );
 
 const headers = {
@@ -795,7 +924,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -889,7 +1018,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/cars" \
+    --get "http://192.168.100.213:9690/api/cars" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -903,7 +1032,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/cars"
+    "http://192.168.100.213:9690/api/cars"
 );
 
 const headers = {
@@ -936,7 +1065,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -952,7 +1081,7 @@ access-control-allow-origin: *
             &quot;to&quot;: null,
             &quot;links&quot;: {
                 &quot;next&quot;: null,
-                &quot;prev&quot;: &quot;http://localhost/api/cars?page=15&quot;
+                &quot;prev&quot;: &quot;http://192.168.100.213:9690/api/cars?page=15&quot;
             }
         }
     },
@@ -1158,10 +1287,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_from"                data-endpoint="GETapi-cars"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>start_at_to</code></b>&nbsp;&nbsp;
@@ -1170,10 +1299,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_to"                data-endpoint="GETapi-cars"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                     </details>
         </div>
@@ -1192,7 +1321,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/owner/cars" \
+    --get "http://192.168.100.213:9690/api/owner/cars" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1206,7 +1335,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/owner/cars"
+    "http://192.168.100.213:9690/api/owner/cars"
 );
 
 const headers = {
@@ -1239,7 +1368,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -1444,10 +1573,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_from"                data-endpoint="GETapi-owner-cars"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>start_at_to</code></b>&nbsp;&nbsp;
@@ -1456,10 +1585,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_to"                data-endpoint="GETapi-owner-cars"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                     </details>
         </div>
@@ -1478,18 +1607,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/owner/kyc" \
+    "http://192.168.100.213:9690/api/owner/kyc" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "nrc_front=@/tmp/phpE2b4Vp" \
-    --form "nrc_back=@/tmp/phpHW3q2i" \
-    --form "selfie=@/tmp/phpnZh5bj" \
-    --form "other_files[]=@/tmp/phpCIfjkQ" </code></pre></div>
+    --form "nrc_front=@/tmp/php3jsQS9" \
+    --form "nrc_back=@/tmp/phpST4NVf" \
+    --form "selfie=@/tmp/phpAZRI1H" \
+    --form "other_files[]=@/tmp/php9bZoSs" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/owner/kyc"
+    "http://192.168.100.213:9690/api/owner/kyc"
 );
 
 const headers = {
@@ -1595,7 +1724,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpE2b4Vp</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/php3jsQS9</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>nrc_back</code></b>&nbsp;&nbsp;
@@ -1607,7 +1736,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpHW3q2i</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpST4NVf</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>selfie</code></b>&nbsp;&nbsp;
@@ -1619,7 +1748,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpnZh5bj</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpAZRI1H</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>other_files</code></b>&nbsp;&nbsp;
@@ -1650,7 +1779,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/owner/cars" \
+    "http://192.168.100.213:9690/api/owner/cars" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "title=b"\
@@ -1664,13 +1793,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "pickup_lng=-179"\
     --form "description=Eius et animi quos velit et."\
     --form "doc_types[]=b"\
-    --form "photos[]=@/tmp/phpn1TQLI" \
-    --form "documents[]=@/tmp/php0ojSfv" </code></pre></div>
+    --form "photos[]=@/tmp/phpBV3iJD" \
+    --form "documents[]=@/tmp/phpA3TcFT" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/owner/cars"
+    "http://192.168.100.213:9690/api/owner/cars"
 );
 
 const headers = {
@@ -1952,7 +2081,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/owner/rental-requests" \
+    --get "http://192.168.100.213:9690/api/owner/rental-requests" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1966,7 +2095,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/owner/rental-requests"
+    "http://192.168.100.213:9690/api/owner/rental-requests"
 );
 
 const headers = {
@@ -1999,7 +2128,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -2204,10 +2333,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_from"                data-endpoint="GETapi-owner-rental-requests"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>start_at_to</code></b>&nbsp;&nbsp;
@@ -2216,10 +2345,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_to"                data-endpoint="GETapi-owner-rental-requests"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                     </details>
         </div>
@@ -2238,7 +2367,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/owner/rentals" \
+    --get "http://192.168.100.213:9690/api/owner/rentals" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2252,7 +2381,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/owner/rentals"
+    "http://192.168.100.213:9690/api/owner/rentals"
 );
 
 const headers = {
@@ -2285,7 +2414,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -2490,10 +2619,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_from"                data-endpoint="GETapi-owner-rentals"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>start_at_to</code></b>&nbsp;&nbsp;
@@ -2502,10 +2631,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_to"                data-endpoint="GETapi-owner-rentals"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                     </details>
         </div>
@@ -2524,20 +2653,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/driver/kyc" \
+    "http://192.168.100.213:9690/api/driver/kyc" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "license_front=@/tmp/phpUCWpbc" \
-    --form "license_back=@/tmp/phpqR2qP9" \
-    --form "nrc_front=@/tmp/phpk64yVy" \
-    --form "nrc_back=@/tmp/phpQxQZh4" \
-    --form "selfie=@/tmp/phpbqX5et" \
-    --form "other_files[]=@/tmp/phpNHk7Z8" </code></pre></div>
+    --form "license_front=@/tmp/phpgl9ILo" \
+    --form "license_back=@/tmp/phpzkSRUB" \
+    --form "nrc_front=@/tmp/phpm2RkuZ" \
+    --form "nrc_back=@/tmp/php4Fo4Xm" \
+    --form "selfie=@/tmp/phpOpARgV" \
+    --form "other_files[]=@/tmp/php4oT5qi" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/driver/kyc"
+    "http://192.168.100.213:9690/api/driver/kyc"
 );
 
 const headers = {
@@ -2645,7 +2774,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpUCWpbc</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpgl9ILo</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>license_back</code></b>&nbsp;&nbsp;
@@ -2657,7 +2786,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpqR2qP9</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpzkSRUB</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>nrc_front</code></b>&nbsp;&nbsp;
@@ -2669,7 +2798,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpk64yVy</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpm2RkuZ</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>nrc_back</code></b>&nbsp;&nbsp;
@@ -2681,7 +2810,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpQxQZh4</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/php4Fo4Xm</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>selfie</code></b>&nbsp;&nbsp;
@@ -2693,7 +2822,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpbqX5et</code></p>
+<p>Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpOpARgV</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>other_files</code></b>&nbsp;&nbsp;
@@ -2724,7 +2853,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/driver/rental-requests" \
+    --get "http://192.168.100.213:9690/api/driver/rental-requests" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2738,7 +2867,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/driver/rental-requests"
+    "http://192.168.100.213:9690/api/driver/rental-requests"
 );
 
 const headers = {
@@ -2771,7 +2900,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -2976,10 +3105,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_from"                data-endpoint="GETapi-driver-rental-requests"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>start_at_to</code></b>&nbsp;&nbsp;
@@ -2988,10 +3117,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="filter.start_at_to"                data-endpoint="GETapi-driver-rental-requests"
-               value="2026-01-22T18:42:30"
+               value="2026-01-23T17:18:17"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-22T18:42:30</code></p>
+<p>Must be a valid date. Example: <code>2026-01-23T17:18:17</code></p>
                     </div>
                                     </details>
         </div>
@@ -3010,7 +3139,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/admin/verifications/architecto/review" \
+    "http://192.168.100.213:9690/api/admin/verifications/architecto/review" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3022,7 +3151,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/admin/verifications/architecto/review"
+    "http://192.168.100.213:9690/api/admin/verifications/architecto/review"
 );
 
 const headers = {
@@ -3171,7 +3300,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/admin/cars/16/review" \
+    "http://192.168.100.213:9690/api/admin/cars/16/review" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3183,7 +3312,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/admin/cars/16/review"
+    "http://192.168.100.213:9690/api/admin/cars/16/review"
 );
 
 const headers = {
