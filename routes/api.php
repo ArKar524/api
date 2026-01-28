@@ -49,7 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('notifications/unread-count', [NotificationController::class, 'unreadCount']);
     Route::patch('notifications/read-all', [NotificationController::class, 'markAllRead']);
     Route::patch('notifications/{id}/read', [NotificationController::class, 'markRead']);
-    Route::delete('notifications/{id}', [NotificationController::class, 'delete']);
+    Route::delete('notifications/{id}/delete', [NotificationController::class, 'delete']);
 
     Route::prefix('owner')->middleware('role:owner')->group(function () {
         Route::get('cars', [CarController::class, 'index']);
