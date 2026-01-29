@@ -10,7 +10,7 @@ const props = defineProps({
         required: true,
     },
 });
-
+console.log(props.car)
 const carState = ref(JSON.parse(JSON.stringify(props.car)));
 const reviewNotes = ref('');
 const isProcessing = ref(false);
@@ -62,9 +62,11 @@ const photoUrl = (photo) => {
     }
 
     if (photo.disk === 'public') {
+        console.log(photo.path)
         return `/storage/${photo.path}`;
     }
 
+    
     return photo.path;
 };
 

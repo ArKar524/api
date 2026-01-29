@@ -25,8 +25,8 @@ return new class extends Migration
             $table->decimal('deposit_amount', 10, 2)->default(0);
             $table->string('currency', 3)->default('USD');
             $table->text('description')->nullable();
-            $table->decimal('pickup_latitude', 10, 7)->nullable();
-            $table->decimal('pickup_longitude', 10, 7)->nullable();
+            // $table->decimal('pickup_latitude', 10, 7)->nullable();
+            // $table->decimal('pickup_longitude', 10, 7)->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();

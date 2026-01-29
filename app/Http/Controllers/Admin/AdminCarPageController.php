@@ -73,8 +73,7 @@ class AdminCarPageController extends Controller
     {
         $car = Car::query()
             ->with(['owner', 'photos', 'documents'])
-            ->findOrFail($id);
-
+            ->findOrFail($id); 
         return Inertia::render('Admin/Cars/Show', [
             'car' => $car,
         ]);
