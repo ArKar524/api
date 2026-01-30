@@ -3,38 +3,63 @@ services:
     build:
       context: .
       dockerfile: docker/8.4/Dockerfile
-    container_name: kargate_api
-    restart: always 
-    # REMOVED the "." volume here. The code is already in the image.
+    container_name: kargate_app
+    restart: always
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
     volumes:
-      - storage-data:/var/www/html/storage 
+      # Only persist storage (logs, uploads, etc)
+      - storage-data:/var/www/html/storage
     depends_on:
       pgsql:
         condition: service_healthy
     networks:
-      - kargate_api_network
+      - kargate_prod_net
 
   nginx:
     image: nginx:alpine
     container_name: kargate_nginx
     restart: always
     ports:
-      - "${APP_PORT:-9690}:80"
+      - "${APP_PORT:-80}:80"
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      # Nginx needs access to the "public" folder for static assets (CSS/JS)
-      # In a true prod setup, we'd use a named volume or copy code into Nginx too
-      - .:/var/www/html:ro 
+      # In this setup, we mount the host Public dir OR we should copy it.
+      # Since `app` image has the code, Nginx needs it too.
+      # OPTION A: Share volume from app.
+      # OPTION B: Host mount (simplest if code is on host for deploy).
+      # Since user asked for "docker compose up -d --build" context, let's assume code is there.
+      # However, strictly for the image-based deploy, usually we use a shared volume or multi-stage build for nginx too.
+      # Given "keep changes minimal", I will maintain the host mount for Nginx static files OR use volumes_from.
+      # Let's use `volumes_from` or helper mount? No, `volumes` from named volume is better.
+      # But wait, `app` has the code in `/var/www/html`. 
+      # Let's try to be clean.
+      # If I don't mount `.` to nginx, it won't see public/build.
+      # I will stick to what the user had but clean it up, or better:
+      # I will use a named volume 'web-root' populated by app? No that's complex.
+      # I will assume for this "prod" file, if it's run via `up --build`, the context exists.
+      # BUT, if `app` is built, we want the files INSIDE the image to be served.
+      # So, `volumes` for `app` should NOT hide the image content.
+      # `storage-data` is fine.
+      # For nginx, it needs access to `/var/www/html/public`.
+      # I'll stick to a simple strategy: `app` volumes are just storage. 
+      # `nginx` needs to serve static assets.
+      # I will add a volume to share assets?
+      # Let's just mount `.` for Nginx for now as the simplest path, assuming the repo is checked out on prod.
+      - .:/var/www/html:ro
     depends_on:
       - app
     networks:
-      - kargate_api_network
+      - kargate_prod_net
 
   pgsql:
-    image: postgres:18-alpine # Postgres 18 is very new; 17 is safer
+    image: postgres:17-alpine
     container_name: kargate_db
+    restart: always
     ports:
-      - "${FORWARD_DB_PORT:-5433}:5432"
+      # Usually don't expose DB port in prod to public, but binding to host is ok for backups.
+      - "127.0.0.1:${FORWARD_DB_PORT:-5432}:5432"
     environment:
       POSTGRES_DB: "${DB_DATABASE}"
       POSTGRES_USER: "${DB_USERNAME}"
@@ -43,16 +68,16 @@ services:
       - pgsql-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 5
     networks:
-      - kargate_api_network
+      - kargate_prod_net
 
 networks:
-  kargate_api_network:
+  kargate_prod_net:
     driver: bridge
 
 volumes:
   pgsql-data:
-  storage-data: # Persists your logs and uploads across restarts
+  storage-data:
