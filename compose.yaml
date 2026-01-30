@@ -3,10 +3,16 @@ services:
     build:
       context: .
       dockerfile: docker/8.4/Dockerfile
+      target: app # Optional: if we want to target a specific stage, but here final is fine.
+                  # However, for DEV, we might want to override some things.
+                  # But usually it's better to just mount the code.
     container_name: kargate_app
+    restart: unless-stopped
     ports:
-      - "${APP_PORT:-9690}:80"
       - "${VITE_PORT:-5173}:5173"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: true
     volumes:
       - .:/var/www/html
     depends_on:
@@ -15,9 +21,24 @@ services:
     networks:
       - kargate
 
+  nginx:
+    image: nginx:alpine
+    container_name: kargate_nginx
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-80}:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - .:/var/www/html
+    depends_on:
+      - app
+    networks:
+      - kargate
+
   pgsql:
-    image: postgres:18-alpine
+    image: postgres:17-alpine
     container_name: kargate_db
+    restart: unless-stopped
     ports:
       - "${FORWARD_DB_PORT:-5432}:5432"
     environment:
@@ -32,19 +53,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    networks:
-      - kargate
-
-  nginx:
-    image: nginx:alpine
-    container_name: kargate_nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - .:/var/www/html
-    depends_on:
-      - app
     networks:
       - kargate
 
