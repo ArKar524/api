@@ -7,6 +7,7 @@ services:
     restart: always
     # REMOVED the "." volume here. The code is already in the image.
     volumes:
+      - .:/var/www/html
       - storage-data:/var/www/html/storage
     depends_on:
       pgsql:
