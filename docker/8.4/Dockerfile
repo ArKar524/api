@@ -2,12 +2,28 @@
 
 # ---------- Stage 1: PHP Base ----------
 FROM php:8.4-fpm-bookworm AS php-base
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  libpng-dev libzip-dev libicu-dev libxml2-dev libpq-dev unzip \
-  && docker-php-ext-configure gd \
-  && docker-php-ext-install -j$(nproc) pdo_pgsql pgsql intl zip gd opcache bcmath \
-  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  libpng-dev \
+  libzip-dev \
+  libicu-dev \
+  libxml2-dev \
+  libpq-dev \
+  unzip \
+  nano \
+  && docker-php-ext-configure gd \
+  && docker-php-ext-install -j$(nproc) \
+     pdo_pgsql \
+     pgsql \
+     intl \
+     zip \
+     gd \
+     opcache \
+     bcmath \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+# OPcache tuning
 RUN { \
   echo 'opcache.memory_consumption=128'; \
   echo 'opcache.interned_strings_buffer=8'; \
@@ -16,53 +32,73 @@ RUN { \
   echo 'opcache.enable_cli=1'; \
   } > /usr/local/etc/php/conf.d/opcache-optimized.ini
 
+
 # ---------- Stage 2: Composer Dependencies ----------
 FROM composer:2 AS vendor
+
 WORKDIR /app
+
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-interaction --no-plugins --no-scripts --prefer-dist
+
+RUN composer install \
+  --no-dev \
+  --no-interaction \
+  --no-plugins \
+  --no-scripts \
+  --prefer-dist
+
 
 # ---------- Stage 3: Frontend Build ----------
 FROM node:22-bookworm-slim AS frontend
+
 WORKDIR /app
+
 RUN corepack enable
+
 COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
+
 RUN \
   if [ -f pnpm-lock.yaml ]; then pnpm i --frozen-lockfile; \
   elif [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
   else npm ci; fi
+
 COPY . .
+
 RUN \
   if [ -f pnpm-lock.yaml ]; then pnpm build; \
   elif [ -f yarn.lock ]; then yarn build; \
   else npm run build; fi
 
+
 # ---------- Stage 4: Final Runtime ----------
 FROM php-base AS app
-ENV APP_ENV=production APP_DEBUG=false
+
+ENV APP_ENV=production \
+    APP_DEBUG=false
 
 WORKDIR /var/www/html
 
 # 1. Copy application skeleton
 COPY --chown=www-data:www-data . .
 
-# 2. Copy dependencies (doing this after skeleton ensures they are not overwritten)
+# 2. Copy backend & frontend artifacts
 COPY --from=vendor --chown=www-data:www-data /app/vendor ./vendor
 COPY --from=frontend --chown=www-data:www-data /app/public/build ./public/build
 
-# 3. Create missing directories and set permissions
-# We create them first to ensure chmod doesn't fail
-RUN mkdir -p storage/framework/cache/data \
-  storage/framework/sessions \
-  storage/framework/views \
-  storage/logs \
-  bootstrap/cache && \
-  chmod -R 775 storage bootstrap/cache && \
-  chown -R www-data:www-data storage bootstrap/cache
+# 3. Prepare writable directories
+RUN mkdir -p \
+    storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache \
+  && chmod -R 775 storage bootstrap/cache \
+  && chown -R www-data:www-data storage bootstrap/cache
 
+# 4. Drop privileges (security)
 USER www-data
 
-# PHP-FPM default port is 9000
+# PHP-FPM default port
 EXPOSE 9000
 
 HEALTHCHECK --interval=30s --timeout=3s \
