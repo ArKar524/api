@@ -31,7 +31,7 @@ services:
       - kargate_api_network
 
   pgsql:
-    image: postgres:18-alpine # Postgres 18 is very new; 17 is safer
+    image: postgres:17-alpine # Postgres 17 is safer
     container_name: kargate_db
     ports:
       - "${FORWARD_DB_PORT:-5433}:5432"
