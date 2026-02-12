@@ -3,11 +3,23 @@ services:
     build:
       context: .
       dockerfile: docker/8.4/Dockerfile
+      target: app
     container_name: kargate_api
-    restart: always
-    # REMOVED the "." volume here. The code is already in the image.
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      DB_CONNECTION: pgsql
+      DB_HOST: pgsql
+      DB_PORT: 5432
+      DB_DATABASE: ${DB_DATABASE:-kargate_api}
+      DB_USERNAME: ${DB_USERNAME:-kargate_api}
+      DB_PASSWORD: ${DB_PASSWORD:-change-me}
+    expose:
+      - "9000"
     volumes:
-      - .:/var/www/html
       - storage-data:/var/www/html/storage
     depends_on:
       pgsql:
@@ -16,34 +28,41 @@ services:
       - kargate_api_network
 
   nginx:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: docker/8.4/Dockerfile
+      target: nginx
     container_name: kargate_nginx
-    restart: always
+    restart: unless-stopped
     ports:
       - "${APP_PORT:-9690}:80"
     volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      # Nginx needs access to the "public" folder for static assets (CSS/JS)
-      # In a true prod setup, we'd use a named volume or copy code into Nginx too
-      - .:/var/www/html:ro
+      - storage-data:/var/www/html/storage:ro
     depends_on:
-      - app
+      app:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/ || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
     networks:
       - kargate_api_network
 
   pgsql:
-    image: postgres:17-alpine # Postgres 17 is safer
+    image: postgres:17-alpine
     container_name: kargate_db
-    ports:
-      - "${FORWARD_DB_PORT:-5433}:5432"
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: "kargate_api"
-      POSTGRES_USER: "kargate_api"
-      POSTGRES_PASSWORD: "kargate_api"
+      POSTGRES_DB: ${DB_DATABASE:-kargate_api}
+      POSTGRES_USER: ${DB_USERNAME:-kargate_api}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-change-me}
+    expose:
+      - "5432"
     volumes:
       - pgsql-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U kargate_api -d kargate_api"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-kargate_api} -d ${DB_DATABASE:-kargate_api}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -56,4 +75,4 @@ networks:
 
 volumes:
   pgsql-data:
-  storage-data: # Persists your logs and uploads across restarts
+  storage-data:

@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libxml2-dev \
   libpq-dev \
   unzip \
-  nano \
   && docker-php-ext-configure gd \
   && docker-php-ext-install -j$(nproc) \
      pdo_pgsql \
@@ -32,6 +31,7 @@ RUN { \
   echo 'opcache.enable_cli=1'; \
   } > /usr/local/etc/php/conf.d/opcache-optimized.ini
 
+COPY docker/8.4/php.ini /usr/local/etc/php/conf.d/99-kargate.ini
 
 # ---------- Stage 2: Composer Dependencies ----------
 FROM composer:2 AS vendor
@@ -45,7 +45,9 @@ RUN composer install \
   --no-interaction \
   --no-plugins \
   --no-scripts \
-  --prefer-dist
+  --prefer-dist \
+  --optimize-autoloader \
+  --classmap-authoritative
 
 
 # ---------- Stage 3: Frontend Build ----------
@@ -92,6 +94,8 @@ RUN mkdir -p \
     storage/framework/views \
     storage/logs \
     bootstrap/cache \
+  && rm -f public/storage \
+  && ln -s ../storage/app/public public/storage \
   && chmod -R 775 storage bootstrap/cache \
   && chown -R www-data:www-data storage bootstrap/cache
 
@@ -101,7 +105,16 @@ USER www-data
 # PHP-FPM default port
 EXPOSE 9000
 
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD pidof php-fpm || exit 1
+HEALTHCHECK --interval=30s --timeout=5s \
+  CMD php-fpm -t || exit 1
 
 CMD ["php-fpm"]
+
+
+# ---------- Stage 5: Nginx Runtime ----------
+FROM nginx:1.27-alpine AS nginx
+
+WORKDIR /var/www/html
+
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=app /var/www/html/public ./public
