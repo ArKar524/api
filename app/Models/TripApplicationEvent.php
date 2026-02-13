@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class RentalEvent extends Model
+class TripApplicationEvent extends Model
 {
     protected $guarded = [];
 
-    public function rental(): BelongsTo
+    public function tripApplication(): BelongsTo
     {
-        return $this->belongsTo(Rental::class);
+        return $this->belongsTo(TripApplication::class, 'trip_application_id');
     }
 }

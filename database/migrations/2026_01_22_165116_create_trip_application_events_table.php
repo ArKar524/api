@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rental_events', function (Blueprint $table) {
+        Schema::create('trip_application_events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rental_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('trip_application_id')->constrained('trip_applications')->cascadeOnDelete();
             $table->enum('type', ['created', 'started', 'paused', 'resumed', 'completed', 'dispute'])->default('created');
             $table->text('notes')->nullable();
             $table->timestamp('occurred_at')->useCurrent();
             $table->timestamps();
 
-            $table->index(['rental_id', 'type']);
+            $table->index(['trip_application_id', 'type']);
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rental_events');
+        Schema::dropIfExists('trip_application_events');
     }
 };

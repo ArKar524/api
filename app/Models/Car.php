@@ -27,14 +27,14 @@ class Car extends Model
         return $this->hasMany(CarDocument::class);
     }
 
-    public function rentalRequests(): HasMany
+    public function trips(): HasMany
     {
-        return $this->hasMany(RentalRequest::class);
+        return $this->hasMany(Trip::class);
     }
 
-    public function rentals(): HasMany
+    public function tripApplications(): HasMany
     {
-        return $this->hasMany(Rental::class);
+        return $this->hasMany(TripApplication::class);
     }
 
     public function carInfos(){

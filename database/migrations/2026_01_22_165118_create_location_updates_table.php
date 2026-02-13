@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('location_updates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rental_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('trip_application_id')->constrained('trip_applications')->cascadeOnDelete();
             $table->foreignId('driver_id')->constrained('users')->cascadeOnDelete();
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('recorded_at')->useCurrent();
             $table->timestamps();
 
-            $table->index(['rental_id', 'recorded_at']);
+            $table->index(['trip_application_id', 'recorded_at']);
             $table->index(['driver_id', 'recorded_at']);
         });
     }

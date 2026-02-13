@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('disputes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rental_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('trip_application_id')->constrained('trip_applications')->cascadeOnDelete();
             $table->foreignId('opened_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('resolved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->enum('status', ['open', 'resolved', 'withdrawn'])->default('open');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('resolution')->nullable();
             $table->timestamps();
 
-            $table->index(['rental_id', 'status']);
+            $table->index(['trip_application_id', 'status']);
         });
     }
 

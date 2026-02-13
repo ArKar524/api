@@ -3,14 +3,17 @@
 namespace Database\Factories;
 
 use App\Models\Car;
+use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RentalRequest>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Trip>
  */
-class RentalRequestFactory extends Factory
+class TripFactory extends Factory
 {
+    protected $model = Trip::class;
+
     /**
      * Define the model's default state.
      *
@@ -38,10 +41,10 @@ class RentalRequestFactory extends Factory
 
     public function configure()
     {
-        return $this->afterCreating(function ($request) {
-            if ($request->car && !$request->owner_id) {
-                $request->owner_id = $request->car->owner_id;
-                $request->save();
+        return $this->afterCreating(function ($trip) {
+            if ($trip->car && !$trip->owner_id) {
+                $trip->owner_id = $trip->car->owner_id;
+                $trip->save();
             }
         });
     }

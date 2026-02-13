@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
+use App\Support\QueryFilters\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Support\QueryFilters\Filterable;
 
-class Rental extends Model
+class TripApplication extends Model
 {
     use Filterable;
+
     protected $guarded = [];
 
-    public function rentalRequest(): BelongsTo
+    public function trip(): BelongsTo
     {
-        return $this->belongsTo(RentalRequest::class);
+        return $this->belongsTo(Trip::class, 'trip_id');
     }
 
     public function car(): BelongsTo
@@ -35,21 +36,21 @@ class Rental extends Model
 
     public function events(): HasMany
     {
-        return $this->hasMany(RentalEvent::class);
+        return $this->hasMany(TripApplicationEvent::class, 'trip_application_id');
     }
 
     public function locationUpdates(): HasMany
     {
-        return $this->hasMany(LocationUpdate::class);
+        return $this->hasMany(LocationUpdate::class, 'trip_application_id');
     }
 
     public function payments(): HasMany
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'trip_application_id');
     }
 
     public function dispute(): HasOne
     {
-        return $this->hasOne(Dispute::class);
+        return $this->hasOne(Dispute::class, 'trip_application_id');
     }
 }

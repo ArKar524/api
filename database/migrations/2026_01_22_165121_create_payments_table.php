@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rental_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('trip_application_id')->constrained('trip_applications')->cascadeOnDelete();
             $table->foreignId('payer_id')->constrained('users')->cascadeOnDelete();
             $table->enum('status', ['pending', 'paid', 'failed', 'refunded'])->default('pending');
             $table->string('method')->default('card');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->index(['rental_id', 'status']);
+            $table->index(['trip_application_id', 'status']);
         });
     }
 

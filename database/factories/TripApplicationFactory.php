@@ -2,14 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\RentalRequest;
+use App\Models\Trip;
+use App\Models\TripApplication;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Rental>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TripApplication>
  */
-class RentalFactory extends Factory
+class TripApplicationFactory extends Factory
 {
+    protected $model = TripApplication::class;
+
     /**
      * Define the model's default state.
      *
@@ -18,7 +21,7 @@ class RentalFactory extends Factory
     public function definition(): array
     {
         return [
-            'rental_request_id' => RentalRequest::factory()->approved(),
+            'trip_id' => Trip::factory()->approved(),
             'car_id' => null,
             'driver_id' => null,
             'owner_id' => null,
@@ -40,12 +43,12 @@ class RentalFactory extends Factory
 
     public function configure()
     {
-        return $this->afterCreating(function ($rental) {
-            if ($rental->rentalRequest) {
-                $rental->car_id = $rental->rentalRequest->car_id;
-                $rental->driver_id = $rental->rentalRequest->driver_id;
-                $rental->owner_id = $rental->rentalRequest->owner_id;
-                $rental->save();
+        return $this->afterCreating(function ($tripApplication) {
+            if ($tripApplication->trip) {
+                $tripApplication->car_id = $tripApplication->trip->car_id;
+                $tripApplication->driver_id = $tripApplication->trip->driver_id;
+                $tripApplication->owner_id = $tripApplication->trip->owner_id;
+                $tripApplication->save();
             }
         });
     }

@@ -8,9 +8,9 @@ use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\CarListController;
 use App\Http\Controllers\KycController;
 use App\Http\Controllers\Owner\CarController;
-use App\Http\Controllers\Driver\RentalRequestController as DriverRentalRequestController;
-use App\Http\Controllers\Owner\RentalRequestController as OwnerRentalRequestController;
-use App\Http\Controllers\Owner\RentalController as OwnerRentalController;
+use App\Http\Controllers\Driver\TripApplicationController as DriverTripApplicationController;
+use App\Http\Controllers\Owner\TripController as OwnerTripController;
+use App\Http\Controllers\Owner\TripApplicationController as OwnerTripApplicationController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -56,13 +56,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('cars/{car}', [CarListController::class, 'show']);
         Route::post('kyc', [KycController::class, 'submitOwner']);
         Route::post('cars', [CarController::class, 'store']);
-        Route::get('rental-requests', [OwnerRentalRequestController::class, 'index']);
-        Route::get('rentals', [OwnerRentalController::class, 'index']);
+        Route::post('trips', [OwnerTripController::class, 'store']);
+        Route::patch('trips/{trip}', [OwnerTripController::class, 'update']);
+        Route::get('trips', [OwnerTripController::class, 'index']);
+        Route::patch('trip-applications/{tripApplication}', [OwnerTripApplicationController::class, 'update']);
+        Route::get('trip-applications', [OwnerTripApplicationController::class, 'index']);
     });
 
     Route::prefix('driver')->middleware('role:driver')->group(function () {
         Route::post('kyc', [KycController::class, 'submitDriver']);
-        Route::get('rental-requests', [DriverRentalRequestController::class, 'index']);
+        Route::post('trip-applications', [DriverTripApplicationController::class, 'store']);
+        Route::get('trips', [DriverTripApplicationController::class, 'index']);
     });
 
     Route::prefix('admin')->middleware('role:admin')->group(function () {

@@ -10,10 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('rental_requests', function (Blueprint $table) {
+        Schema::create('trips', function (Blueprint $table) {
             $table->id();
             $table->foreignId('car_id')->constrained()->cascadeOnDelete();
-            // $table->foreignId('driver_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('driver_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete();
             $table->enum('status', ['pending', 'approved', 'declined', 'cancelled'])->default('pending');
             $table->date('start_date');
@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->decimal('daily_rate', 10, 2)->default(0);
             $table->string('currency', 3)->default('USD');
             $table->string('pickup_location')->nullable();
-            $table->string('dropoff_location')->nullable();
+            $table->string('dropoff_location')->nullable(); 
             $table->text('notes')->nullable();
             $table->timestamps();
 
@@ -34,6 +34,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('rental_requests');
+        Schema::dropIfExists('trips');
     }
 };

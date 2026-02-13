@@ -23,7 +23,7 @@ class AllowedFilters
         ];
     }
 
-    public static function rentalRequestDriver(): array
+    public static function tripDriver(): array
     {
         return [
             'status' => fn($q, $v) => $q->where('status', $v),
@@ -31,7 +31,7 @@ class AllowedFilters
         ];
     }
 
-    public static function rentalRequestOwner(): array
+    public static function tripOwner(): array
     {
         return [
             'status' => fn($q, $v) => $q->where('status', $v),
@@ -40,7 +40,7 @@ class AllowedFilters
         ];
     }
 
-    public static function rentalOwner(): array
+    public static function tripApplicationOwner(): array
     {
         return [
             'status' => fn($q, $v) => $q->where('status', $v),

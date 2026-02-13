@@ -98,17 +98,17 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-owner-cars">
                                 <a href="#endpoints-POSTapi-owner-cars">POST api/owner/cars</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-owner-rental-requests">
-                                <a href="#endpoints-GETapi-owner-rental-requests">GET api/owner/rental-requests</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-owner-trips">
+                                <a href="#endpoints-GETapi-owner-trips">GET api/owner/trips</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-owner-rentals">
-                                <a href="#endpoints-GETapi-owner-rentals">GET api/owner/rentals</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-owner-trip-applications">
+                                <a href="#endpoints-GETapi-owner-trip-applications">GET api/owner/trip-applications</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-driver-kyc">
                                 <a href="#endpoints-POSTapi-driver-kyc">POST api/driver/kyc</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-driver-rental-requests">
-                                <a href="#endpoints-GETapi-driver-rental-requests">GET api/driver/rental-requests</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-driver-trips">
+                                <a href="#endpoints-GETapi-driver-trips">GET api/driver/trips</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-admin-verifications--id--review">
                                 <a href="#endpoints-POSTapi-admin-verifications--id--review">POST api/admin/verifications/{id}/review</a>
@@ -1939,20 +1939,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-owner-rental-requests">GET api/owner/rental-requests</h2>
+                    <h2 id="endpoints-GETapi-owner-trips">GET api/owner/trips</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-owner-rental-requests">
+<span id="example-requests-GETapi-owner-trips">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/owner/rental-requests" \
+    --get "http://localhost/api/owner/trips" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1966,7 +1966,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/owner/rental-requests"
+    "http://localhost/api/owner/trips"
 );
 
 const headers = {
@@ -1989,7 +1989,7 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-owner-rental-requests">
+<span id="example-responses-GETapi-owner-trips">
             <blockquote>
             <p>Example response (401):</p>
         </blockquote>
@@ -2007,43 +2007,43 @@ access-control-allow-origin: *
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-owner-rental-requests" hidden>
+<span id="execution-results-GETapi-owner-trips" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-owner-rental-requests"></span>:
+                id="execution-response-status-GETapi-owner-trips"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-owner-rental-requests"
+    <pre class="json"><code id="execution-response-content-GETapi-owner-trips"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-owner-rental-requests" hidden>
+<span id="execution-error-GETapi-owner-trips" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-owner-rental-requests">
+    <pre><code id="execution-error-message-GETapi-owner-trips">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-owner-rental-requests" data-method="GET"
-      data-path="api/owner/rental-requests"
+<form id="form-GETapi-owner-trips" data-method="GET"
+      data-path="api/owner/trips"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-owner-rental-requests', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-owner-trips', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-owner-rental-requests"
-                    onclick="tryItOut('GETapi-owner-rental-requests');">Try it out ⚡
+                    id="btn-tryout-GETapi-owner-trips"
+                    onclick="tryItOut('GETapi-owner-trips');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-owner-rental-requests"
-                    onclick="cancelTryOut('GETapi-owner-rental-requests');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-owner-trips"
+                    onclick="cancelTryOut('GETapi-owner-trips');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-owner-rental-requests"
+                    id="btn-executetryout-GETapi-owner-trips"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2051,7 +2051,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/owner/rental-requests</code></b>
+            <b><code>api/owner/trips</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2060,7 +2060,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-owner-rental-requests"
+                              name="Content-Type"                data-endpoint="GETapi-owner-trips"
                value="application/json"
                data-component="header">
     <br>
@@ -2072,7 +2072,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-owner-rental-requests"
+                              name="Accept"                data-endpoint="GETapi-owner-trips"
                value="application/json"
                data-component="header">
     <br>
@@ -2085,7 +2085,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="page"                data-endpoint="GETapi-owner-rental-requests"
+               step="any"               name="page"                data-endpoint="GETapi-owner-trips"
                value="16"
                data-component="body">
     <br>
@@ -2097,7 +2097,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="per_page"                data-endpoint="GETapi-owner-rental-requests"
+               step="any"               name="per_page"                data-endpoint="GETapi-owner-trips"
                value="22"
                data-component="body">
     <br>
@@ -2109,7 +2109,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="sort"                data-endpoint="GETapi-owner-rental-requests"
+                              name="sort"                data-endpoint="GETapi-owner-trips"
                value="architecto"
                data-component="body">
     <br>
@@ -2121,7 +2121,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="q"                data-endpoint="GETapi-owner-rental-requests"
+                              name="q"                data-endpoint="GETapi-owner-trips"
                value="n"
                data-component="body">
     <br>
@@ -2143,7 +2143,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.price_min"                data-endpoint="GETapi-owner-rental-requests"
+               step="any"               name="filter.price_min"                data-endpoint="GETapi-owner-trips"
                value="4326.41688"
                data-component="body">
     <br>
@@ -2155,7 +2155,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.price_max"                data-endpoint="GETapi-owner-rental-requests"
+               step="any"               name="filter.price_max"                data-endpoint="GETapi-owner-trips"
                value="4326.41688"
                data-component="body">
     <br>
@@ -2167,7 +2167,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.car_id"                data-endpoint="GETapi-owner-rental-requests"
+               step="any"               name="filter.car_id"                data-endpoint="GETapi-owner-trips"
                value="16"
                data-component="body">
     <br>
@@ -2179,7 +2179,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.driver_id"                data-endpoint="GETapi-owner-rental-requests"
+               step="any"               name="filter.driver_id"                data-endpoint="GETapi-owner-trips"
                value="16"
                data-component="body">
     <br>
@@ -2191,7 +2191,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.owner_id"                data-endpoint="GETapi-owner-rental-requests"
+               step="any"               name="filter.owner_id"                data-endpoint="GETapi-owner-trips"
                value="16"
                data-component="body">
     <br>
@@ -2203,7 +2203,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="filter.start_at_from"                data-endpoint="GETapi-owner-rental-requests"
+                              name="filter.start_at_from"                data-endpoint="GETapi-owner-trips"
                value="2026-01-22T18:42:30"
                data-component="body">
     <br>
@@ -2215,7 +2215,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="filter.start_at_to"                data-endpoint="GETapi-owner-rental-requests"
+                              name="filter.start_at_to"                data-endpoint="GETapi-owner-trips"
                value="2026-01-22T18:42:30"
                data-component="body">
     <br>
@@ -2225,20 +2225,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-owner-rentals">GET api/owner/rentals</h2>
+                    <h2 id="endpoints-GETapi-owner-trip-applications">GET api/owner/trip-applications</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-owner-rentals">
+<span id="example-requests-GETapi-owner-trip-applications">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/owner/rentals" \
+    --get "http://localhost/api/owner/trip-applications" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2252,7 +2252,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/owner/rentals"
+    "http://localhost/api/owner/trip-applications"
 );
 
 const headers = {
@@ -2275,7 +2275,7 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-owner-rentals">
+<span id="example-responses-GETapi-owner-trip-applications">
             <blockquote>
             <p>Example response (401):</p>
         </blockquote>
@@ -2293,43 +2293,43 @@ access-control-allow-origin: *
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-owner-rentals" hidden>
+<span id="execution-results-GETapi-owner-trip-applications" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-owner-rentals"></span>:
+                id="execution-response-status-GETapi-owner-trip-applications"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-owner-rentals"
+    <pre class="json"><code id="execution-response-content-GETapi-owner-trip-applications"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-owner-rentals" hidden>
+<span id="execution-error-GETapi-owner-trip-applications" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-owner-rentals">
+    <pre><code id="execution-error-message-GETapi-owner-trip-applications">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-owner-rentals" data-method="GET"
-      data-path="api/owner/rentals"
+<form id="form-GETapi-owner-trip-applications" data-method="GET"
+      data-path="api/owner/trip-applications"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-owner-rentals', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-owner-trip-applications', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-owner-rentals"
-                    onclick="tryItOut('GETapi-owner-rentals');">Try it out ⚡
+                    id="btn-tryout-GETapi-owner-trip-applications"
+                    onclick="tryItOut('GETapi-owner-trip-applications');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-owner-rentals"
-                    onclick="cancelTryOut('GETapi-owner-rentals');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-owner-trip-applications"
+                    onclick="cancelTryOut('GETapi-owner-trip-applications');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-owner-rentals"
+                    id="btn-executetryout-GETapi-owner-trip-applications"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2337,7 +2337,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/owner/rentals</code></b>
+            <b><code>api/owner/trip-applications</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2346,7 +2346,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-owner-rentals"
+                              name="Content-Type"                data-endpoint="GETapi-owner-trip-applications"
                value="application/json"
                data-component="header">
     <br>
@@ -2358,7 +2358,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-owner-rentals"
+                              name="Accept"                data-endpoint="GETapi-owner-trip-applications"
                value="application/json"
                data-component="header">
     <br>
@@ -2371,7 +2371,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="page"                data-endpoint="GETapi-owner-rentals"
+               step="any"               name="page"                data-endpoint="GETapi-owner-trip-applications"
                value="16"
                data-component="body">
     <br>
@@ -2383,7 +2383,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="per_page"                data-endpoint="GETapi-owner-rentals"
+               step="any"               name="per_page"                data-endpoint="GETapi-owner-trip-applications"
                value="22"
                data-component="body">
     <br>
@@ -2395,7 +2395,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="sort"                data-endpoint="GETapi-owner-rentals"
+                              name="sort"                data-endpoint="GETapi-owner-trip-applications"
                value="architecto"
                data-component="body">
     <br>
@@ -2407,7 +2407,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="q"                data-endpoint="GETapi-owner-rentals"
+                              name="q"                data-endpoint="GETapi-owner-trip-applications"
                value="n"
                data-component="body">
     <br>
@@ -2429,7 +2429,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.price_min"                data-endpoint="GETapi-owner-rentals"
+               step="any"               name="filter.price_min"                data-endpoint="GETapi-owner-trip-applications"
                value="4326.41688"
                data-component="body">
     <br>
@@ -2441,7 +2441,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.price_max"                data-endpoint="GETapi-owner-rentals"
+               step="any"               name="filter.price_max"                data-endpoint="GETapi-owner-trip-applications"
                value="4326.41688"
                data-component="body">
     <br>
@@ -2453,7 +2453,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.car_id"                data-endpoint="GETapi-owner-rentals"
+               step="any"               name="filter.car_id"                data-endpoint="GETapi-owner-trip-applications"
                value="16"
                data-component="body">
     <br>
@@ -2465,7 +2465,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.driver_id"                data-endpoint="GETapi-owner-rentals"
+               step="any"               name="filter.driver_id"                data-endpoint="GETapi-owner-trip-applications"
                value="16"
                data-component="body">
     <br>
@@ -2477,7 +2477,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.owner_id"                data-endpoint="GETapi-owner-rentals"
+               step="any"               name="filter.owner_id"                data-endpoint="GETapi-owner-trip-applications"
                value="16"
                data-component="body">
     <br>
@@ -2489,7 +2489,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="filter.start_at_from"                data-endpoint="GETapi-owner-rentals"
+                              name="filter.start_at_from"                data-endpoint="GETapi-owner-trip-applications"
                value="2026-01-22T18:42:30"
                data-component="body">
     <br>
@@ -2501,7 +2501,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="filter.start_at_to"                data-endpoint="GETapi-owner-rentals"
+                              name="filter.start_at_to"                data-endpoint="GETapi-owner-trip-applications"
                value="2026-01-22T18:42:30"
                data-component="body">
     <br>
@@ -2711,20 +2711,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-driver-rental-requests">GET api/driver/rental-requests</h2>
+                    <h2 id="endpoints-GETapi-driver-trips">GET api/driver/trips</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-driver-rental-requests">
+<span id="example-requests-GETapi-driver-trips">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/driver/rental-requests" \
+    --get "http://localhost/api/driver/trips" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2738,7 +2738,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/driver/rental-requests"
+    "http://localhost/api/driver/trips"
 );
 
 const headers = {
@@ -2761,7 +2761,7 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-driver-rental-requests">
+<span id="example-responses-GETapi-driver-trips">
             <blockquote>
             <p>Example response (401):</p>
         </blockquote>
@@ -2779,43 +2779,43 @@ access-control-allow-origin: *
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-driver-rental-requests" hidden>
+<span id="execution-results-GETapi-driver-trips" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-driver-rental-requests"></span>:
+                id="execution-response-status-GETapi-driver-trips"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-driver-rental-requests"
+    <pre class="json"><code id="execution-response-content-GETapi-driver-trips"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-driver-rental-requests" hidden>
+<span id="execution-error-GETapi-driver-trips" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-driver-rental-requests">
+    <pre><code id="execution-error-message-GETapi-driver-trips">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-driver-rental-requests" data-method="GET"
-      data-path="api/driver/rental-requests"
+<form id="form-GETapi-driver-trips" data-method="GET"
+      data-path="api/driver/trips"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-driver-rental-requests', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-driver-trips', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-driver-rental-requests"
-                    onclick="tryItOut('GETapi-driver-rental-requests');">Try it out ⚡
+                    id="btn-tryout-GETapi-driver-trips"
+                    onclick="tryItOut('GETapi-driver-trips');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-driver-rental-requests"
-                    onclick="cancelTryOut('GETapi-driver-rental-requests');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-driver-trips"
+                    onclick="cancelTryOut('GETapi-driver-trips');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-driver-rental-requests"
+                    id="btn-executetryout-GETapi-driver-trips"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2823,7 +2823,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/driver/rental-requests</code></b>
+            <b><code>api/driver/trips</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2832,7 +2832,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-driver-rental-requests"
+                              name="Content-Type"                data-endpoint="GETapi-driver-trips"
                value="application/json"
                data-component="header">
     <br>
@@ -2844,7 +2844,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-driver-rental-requests"
+                              name="Accept"                data-endpoint="GETapi-driver-trips"
                value="application/json"
                data-component="header">
     <br>
@@ -2857,7 +2857,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="page"                data-endpoint="GETapi-driver-rental-requests"
+               step="any"               name="page"                data-endpoint="GETapi-driver-trips"
                value="16"
                data-component="body">
     <br>
@@ -2869,7 +2869,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="per_page"                data-endpoint="GETapi-driver-rental-requests"
+               step="any"               name="per_page"                data-endpoint="GETapi-driver-trips"
                value="22"
                data-component="body">
     <br>
@@ -2881,7 +2881,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="sort"                data-endpoint="GETapi-driver-rental-requests"
+                              name="sort"                data-endpoint="GETapi-driver-trips"
                value="architecto"
                data-component="body">
     <br>
@@ -2893,7 +2893,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="q"                data-endpoint="GETapi-driver-rental-requests"
+                              name="q"                data-endpoint="GETapi-driver-trips"
                value="n"
                data-component="body">
     <br>
@@ -2915,7 +2915,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.price_min"                data-endpoint="GETapi-driver-rental-requests"
+               step="any"               name="filter.price_min"                data-endpoint="GETapi-driver-trips"
                value="4326.41688"
                data-component="body">
     <br>
@@ -2927,7 +2927,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.price_max"                data-endpoint="GETapi-driver-rental-requests"
+               step="any"               name="filter.price_max"                data-endpoint="GETapi-driver-trips"
                value="4326.41688"
                data-component="body">
     <br>
@@ -2939,7 +2939,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.car_id"                data-endpoint="GETapi-driver-rental-requests"
+               step="any"               name="filter.car_id"                data-endpoint="GETapi-driver-trips"
                value="16"
                data-component="body">
     <br>
@@ -2951,7 +2951,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.driver_id"                data-endpoint="GETapi-driver-rental-requests"
+               step="any"               name="filter.driver_id"                data-endpoint="GETapi-driver-trips"
                value="16"
                data-component="body">
     <br>
@@ -2963,7 +2963,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="filter.owner_id"                data-endpoint="GETapi-driver-rental-requests"
+               step="any"               name="filter.owner_id"                data-endpoint="GETapi-driver-trips"
                value="16"
                data-component="body">
     <br>
@@ -2975,7 +2975,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="filter.start_at_from"                data-endpoint="GETapi-driver-rental-requests"
+                              name="filter.start_at_from"                data-endpoint="GETapi-driver-trips"
                value="2026-01-22T18:42:30"
                data-component="body">
     <br>
@@ -2987,7 +2987,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="filter.start_at_to"                data-endpoint="GETapi-driver-rental-requests"
+                              name="filter.start_at_to"                data-endpoint="GETapi-driver-trips"
                value="2026-01-22T18:42:30"
                data-component="body">
     <br>

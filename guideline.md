@@ -7,12 +7,12 @@ A) Naming:
 B) Indexing (MUST):
 - Index all FKs automatically via constrained()
 - Add indexes for: status columns, plate_number, vin, contract_no, recorded_at
-- Add composite index for location_updates: (rental_id, recorded_at)
+- Add composite index for location_updates: (trip_application_id, recorded_at)
 
 C) Data retention / audit:
-- Use softDeletes() for: cars, rental_requests, rentals, payments, disputes
-- Do NOT cascade delete rentals/payments/disputes (audit). Only cascade delete purely child assets:
-  car_photos, car_documents, verification_files, rental_events, location_updates (safe)
+- Use softDeletes() for: cars, trips, trip_applications, payments, disputes
+- Do NOT cascade delete trip_applications/payments/disputes (audit). Only cascade delete purely child assets:
+  car_photos, car_documents, verification_files, trip_application_events, location_updates (safe)
 
 D) Model design:
 - Add status/type constants (or PHP enums if you choose) in each model.

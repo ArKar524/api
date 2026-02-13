@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Car;
-use App\Models\Rental;
-use App\Models\RentalRequest;
+use App\Models\Trip;
+use App\Models\TripApplication;
 use App\Models\Verification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -90,23 +90,23 @@ class User extends Authenticatable
             ->latestOfMany();
     }
 
-    public function rentalRequestsAsDriver(): HasMany
+    public function tripsAsDriver(): HasMany
     {
-        return $this->hasMany(RentalRequest::class, 'driver_id');
+        return $this->hasMany(Trip::class, 'driver_id');
     }
 
-    public function rentalRequestsAsOwner(): HasMany
+    public function tripsAsOwner(): HasMany
     {
-        return $this->hasMany(RentalRequest::class, 'owner_id');
+        return $this->hasMany(Trip::class, 'owner_id');
     }
 
-    public function rentalsAsDriver(): HasMany
+    public function tripApplicationsAsDriver(): HasMany
     {
-        return $this->hasMany(Rental::class, 'driver_id');
+        return $this->hasMany(TripApplication::class, 'driver_id');
     }
 
-    public function rentalsAsOwner(): HasMany
+    public function tripApplicationsAsOwner(): HasMany
     {
-        return $this->hasMany(Rental::class, 'owner_id');
+        return $this->hasMany(TripApplication::class, 'owner_id');
     }
 }

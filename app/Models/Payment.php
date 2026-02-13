@@ -9,9 +9,9 @@ class Payment extends Model
 {
     protected $guarded = [];
 
-    public function rental(): BelongsTo
+    public function tripApplication(): BelongsTo
     {
-        return $this->belongsTo(Rental::class);
+        return $this->belongsTo(TripApplication::class, 'trip_application_id');
     }
 
     public function payer(): BelongsTo

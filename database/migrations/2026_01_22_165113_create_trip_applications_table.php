@@ -11,23 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rentals', function (Blueprint $table) {
+        Schema::create('trip_applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rental_request_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('trip_id')->constrained('trips')->cascadeOnDelete();
             $table->foreignId('car_id')->constrained()->restrictOnDelete();
             $table->foreignId('driver_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete();
             $table->enum('status', ['active', 'completed', 'dispute', 'cancelled'])->default('active');
             $table->decimal('total_amount', 12, 2)->default(0);
-            $table->string('currency', 3)->default('MMK');
+            $table->string('currency', 3)->default('USD');
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
             $table->string('pickup_location')->nullable();
             $table->string('dropoff_location')->nullable();
             $table->text('contract_terms')->nullable();
             $table->timestamps();
-
-            $table->unique('rental_request_id');
+            $table->unique('trip_id');
             $table->index(['car_id', 'status']);
         });
     }
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rentals');
+        Schema::dropIfExists('trip_applications');
     }
 };
