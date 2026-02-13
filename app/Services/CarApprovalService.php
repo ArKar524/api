@@ -30,8 +30,8 @@ class CarApprovalService
                 // 'deposit_amount' => $data['deposit_amount'] ?? 0,
                 'currency' => 'USD',
                 'description' => $data['description'] ?? null,
-                'pickup_latitude' => $data['pickup_lat'] ?? null,
-                'pickup_longitude' => $data['pickup_lng'] ?? null,
+                // 'pickup_latitude' => $data['pickup_lat'] ?? null,
+                // 'pickup_longitude' => $data['pickup_lng'] ?? null,
             ]);
 
             $photoDir = "cars/{$car->id}/photos";
@@ -99,8 +99,8 @@ class CarApprovalService
             $car->owner()->first()?->notify(new ActionNotification(
                 'Car reviewed',
                 $status === 'approved'
-                    ? 'Your car listing has been approved.'
-                    : 'Your car listing has been rejected.',
+                ? 'Your car listing has been approved.'
+                : 'Your car listing has been rejected.',
                 'car.reviewed',
                 $status,
                 [
